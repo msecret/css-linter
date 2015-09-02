@@ -83,7 +83,7 @@ var ensureSpaceInProperty = postcss.plugin('space-in-property', function (opts) 
     };
 });
 
-var SPC_SpaceBeforeBracket = postcss.plugin('SPC_SpaceBeforeBracket',
+var SPC04_SpaceBeforeBracket = postcss.plugin('SPC04_SpaceBeforeBracket',
     function(opts) {
   opts = opts || {}; 
 
@@ -94,7 +94,7 @@ var SPC_SpaceBeforeBracket = postcss.plugin('SPC_SpaceBeforeBracket',
 
       if (actual === desired) return;
       var e = new LintError('Put spaces before { in rule declarations.',
-        'SPC', decl.source, decl);
+        'SPC04', decl.source, decl);
       result.warn(e.msg, e.opts);
     });
   };
@@ -103,7 +103,7 @@ var SPC_SpaceBeforeBracket = postcss.plugin('SPC_SpaceBeforeBracket',
 module.exports = [
   //ensureNoIndentSelectors,
   //ensureSpaceInRuleName,
-  SPC_SpaceBeforeBracket
+  SPC04_SpaceBeforeBracket
 ];
 //   ensureEachPropertyOwnLine,
 //   ensureSpaceInProperty,
