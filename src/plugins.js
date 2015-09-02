@@ -1,7 +1,8 @@
 var postcss = require('postcss');
 
-function LintError (msg, source, obj) {
+function LintError(msg, id, source, obj) {
   this.msg = msg;
+  this.id = id;
   this.opts = {
     line: source.start.line,
     column: source.start.column
@@ -82,7 +83,7 @@ var ensureSpaceInProperty = postcss.plugin('space-in-property', function (opts) 
     };
 });
 
-var ensureSpaceBeforeBracket = postcss.plugin('ensureSpaceBeforeBracket',
+var SPC_SpaceBeforeBracket = postcss.plugin('SPC_SpaceBeforeBracket',
     function(opts) {
   opts = opts || {}; 
 
@@ -92,8 +93,8 @@ var ensureSpaceBeforeBracket = postcss.plugin('ensureSpaceBeforeBracket',
       var actual = decl.parent.raws.between;
 
       if (actual === desired) return;
-      var e = new LintError('Ensure a space between selector and bracket',
-        decl.source, decl);
+      var e = new LintError('Put spaces before { in rule declarations.',
+        'SPC', decl.source, decl);
       result.warn(e.msg, e.opts);
     });
   };
@@ -102,7 +103,7 @@ var ensureSpaceBeforeBracket = postcss.plugin('ensureSpaceBeforeBracket',
 module.exports = [
   //ensureNoIndentSelectors,
   //ensureSpaceInRuleName,
-  ensureSpaceBeforeBracket
+  SPC_SpaceBeforeBracket
 ];
 //   ensureEachPropertyOwnLine,
 //   ensureSpaceInProperty,
