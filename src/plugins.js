@@ -82,8 +82,28 @@ var ensureSpaceInProperty = postcss.plugin('space-in-property', function (opts) 
     };
 });
 
-module.exports = [ensureNoIndentSelectors,
-    ensureSpaceInRuleName];
+var ensureSpaceBeforeBracket = postcss.plugin('ensureSpaceBeforeBracket',
+    function(opts) {
+  opts = opts || {}; 
+
+  return function(css, result) {
+    var desired = ' ';
+    css.walkDecls(function(decl) {
+      var actual = decl.parent.raws.between;
+
+      if (actual === desired) return;
+      var e = new LintError('Ensure a space between selector and bracket',
+        decl.source, decl);
+      result.warn(e.msg, e.opts);
+    });
+  };
+});
+
+module.exports = [
+  //ensureNoIndentSelectors,
+  //ensureSpaceInRuleName,
+  ensureSpaceBeforeBracket
+];
 //   ensureEachPropertyOwnLine,
 //   ensureSpaceInProperty,
 //   ensureNewLineBeforeRuleClosing,

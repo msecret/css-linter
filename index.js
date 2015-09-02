@@ -14,6 +14,6 @@ postcss(plugins)
   .process(sourceCss, processOpts)
   .then(function (result) {
     result.messages.forEach(function(i) {
-      console.log('i', i);
+      console.log('-- RULE', i);
     });
   });
